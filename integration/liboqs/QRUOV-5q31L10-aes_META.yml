@@ -15,7 +15,7 @@ claimed-nist-level: 5
 length-public-key: 58516
 length-secret-key: 32
 length-signature: 807
-nistkat-sha256: d8d3e02c5384ce0733ef98068e73fdc9ea31bb027a2aeb8bf2ba672ebadef549
+nistkat-sha256: 12927998b2455092877955800c448e6c364ba993b8c99813543f261a466c7167
 implementations:
 - name: ref
   version: Round 3
@@ -52,4 +52,6 @@ implementations:
     - Darwin
     required_flags:
     - avx2
+    - bmi2
+    - aes
   memory_optimized: false
