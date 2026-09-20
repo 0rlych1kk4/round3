@@ -25,6 +25,8 @@ implementations:
   signature_signature: qruov_1q7L10_shake_ref_crypto_sign_signature
   signature_verify: qruov_1q7L10_shake_ref_crypto_sign_verify
   sources: src/api.h src/qruov.h src/qruov_param.h src/qruov_tau.h src/fql.h src/gf.h src/qrop.c src/qrop.h src/qruov_common.c src/qruov_common.h src/prg.c src/prg.h src/prim.c src/prim.h src/linsys.c src/linsys.h src/sign.c src/rng.h src/util.h src/ref/qruov.c src/ref/fastop.h integration/liboqs/namespace.h integration/liboqs/randombytes.c integration/liboqs/signature.c
+  memory_optimized: false
+  supported_platforms: []
 - name: opt
   version: Round 3
   folder_name: .
@@ -33,6 +35,8 @@ implementations:
   signature_signature: qruov_1q7L10_shake_opt_crypto_sign_signature
   signature_verify: qruov_1q7L10_shake_opt_crypto_sign_verify
   sources: src/api.h src/qruov.h src/qruov_param.h src/qruov_tau.h src/fql.h src/gf.h src/qrop.c src/qrop.h src/qruov_common.c src/qruov_common.h src/prg.c src/prg.h src/prim.c src/prim.h src/linsys.c src/linsys.h src/sign.c src/rng.h src/util.h src/opt/qruov.c src/opt/emi_transform.c src/opt/emi_transform_gen.c src/opt/emi_transform.h src/opt/fastop.h integration/liboqs/namespace.h integration/liboqs/randombytes.c integration/liboqs/signature.c
+  memory_optimized: false
+  supported_platforms: []
 - name: avx2
   version: Round 3
   folder_name: .
@@ -48,3 +52,4 @@ implementations:
     - Darwin
     required_flags:
     - avx2
+  memory_optimized: false
