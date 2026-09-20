@@ -1,0 +1,50 @@
+name: QRUOV-3q127L3-aes
+type: signature
+principal-submitters:
+- Rika Akiyama
+- Hiroki Furue
+- Yasuhiko Ikematsu
+- Fumitaka Hoshino
+- Koha Kinjo
+- Haruhisa Kosuge
+- Satoshi Nakamura
+- Shingo Orihara
+- Tsuyoshi Takagi
+- Kimihiro Yamakoshi
+claimed-nist-level: 3
+length-public-key: 71884
+length-secret-key: 32
+length-signature: 292
+nistkat-sha256: 88239ecd547b28e2ded3e848274ad99c565eb3b6b3ebc5b3c7942265dec3576c
+implementations:
+- name: ref
+  version: Round 3
+  folder_name: .
+  compile_opts: -DQRUOV_PARAM_3q127L3 -DPRG_IS_AES=1 -DQRUOV_PRIM_OQS -DQRUOV_NAMESPACE_PREFIX=qruov_3q127L3_aes_ref_
+  signature_keypair: qruov_3q127L3_aes_ref_crypto_sign_keypair
+  signature_signature: qruov_3q127L3_aes_ref_crypto_sign_signature
+  signature_verify: qruov_3q127L3_aes_ref_crypto_sign_verify
+  sources: src/api.h src/qruov.h src/qruov_param.h src/qruov_tau.h src/fql.h src/gf.h src/qrop.c src/qrop.h src/qruov_common.c src/qruov_common.h src/prg.c src/prg.h src/prim.c src/prim.h src/linsys.c src/linsys.h src/sign.c src/rng.h src/util.h src/ref/qruov.c src/ref/fastop.h integration/liboqs/namespace.h integration/liboqs/randombytes.c integration/liboqs/signature.c
+- name: opt
+  version: Round 3
+  folder_name: .
+  compile_opts: -DQRUOV_PARAM_3q127L3 -DPRG_IS_AES=1 -DQRUOV_PRIM_OQS -DQRUOV_NAMESPACE_PREFIX=qruov_3q127L3_aes_opt_
+  signature_keypair: qruov_3q127L3_aes_opt_crypto_sign_keypair
+  signature_signature: qruov_3q127L3_aes_opt_crypto_sign_signature
+  signature_verify: qruov_3q127L3_aes_opt_crypto_sign_verify
+  sources: src/api.h src/qruov.h src/qruov_param.h src/qruov_tau.h src/fql.h src/gf.h src/qrop.c src/qrop.h src/qruov_common.c src/qruov_common.h src/prg.c src/prg.h src/prim.c src/prim.h src/linsys.c src/linsys.h src/sign.c src/rng.h src/util.h src/opt/qruov.c src/opt/emi_transform.c src/opt/emi_transform_gen.c src/opt/emi_transform.h src/opt/fastop.h integration/liboqs/namespace.h integration/liboqs/randombytes.c integration/liboqs/signature.c
+- name: avx2
+  version: Round 3
+  folder_name: .
+  compile_opts: -DQRUOV_PARAM_3q127L3 -DPRG_IS_AES=1 -DQRUOV_PRIM_OQS -DQRUOV_NAMESPACE_PREFIX=qruov_3q127L3_aes_avx2_ -DPRIM_AES_BACKEND_X86AESNI=1 -mavx2 -mbmi2 -maes
+  signature_keypair: qruov_3q127L3_aes_avx2_crypto_sign_keypair
+  signature_signature: qruov_3q127L3_aes_avx2_crypto_sign_signature
+  signature_verify: qruov_3q127L3_aes_avx2_crypto_sign_verify
+  sources: src/api.h src/qruov.h src/qruov_param.h src/qruov_tau.h src/fql.h src/gf.h src/qrop.c src/qrop.h src/qruov_common.c src/qruov_common.h src/prg.c src/prg.h src/prim.c src/prim.h src/linsys.c src/linsys.h src/sign.c src/rng.h src/util.h src/avx2/qruov.c src/avx2/emi_transform.c src/avx2/emi_matrix.c src/avx2/emi_transform_gen.c src/avx2/helpers.c src/avx2/kernel.c src/avx2/x86aesni.c src/avx2/emi_transform.h src/avx2/fastop.h src/avx2/helpers.h src/avx2/kernel.h src/avx2/qruov_simd.h src/avx2/simd.h src/avx2/x86aesni.h integration/liboqs/namespace.h integration/liboqs/randombytes.c integration/liboqs/signature.c
+  supported_platforms:
+  - architecture: x86_64
+    operating_systems:
+    - Linux
+    - Darwin
+    required_flags:
+    - avx2
