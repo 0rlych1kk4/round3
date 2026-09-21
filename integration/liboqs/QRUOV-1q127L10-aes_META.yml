@@ -24,9 +24,10 @@ implementations:
   signature_keypair: qruov_1q127L10_aes_ref_crypto_sign_keypair
   signature_signature: qruov_1q127L10_aes_ref_crypto_sign_signature
   signature_verify: qruov_1q127L10_aes_ref_crypto_sign_verify
-  sources: src/api.h src/qruov.h src/qruov_param.h src/qruov_tau.h src/fql.h src/gf.h src/qrop.c src/qrop.h src/qruov_common.c src/qruov_common.h src/prg.c src/prg.h src/prim.c src/prim.h src/linsys.c src/linsys.h src/sign.c src/rng.h src/util.h src/ref/qruov.c src/ref/fastop.h integration/liboqs/namespace.h integration/liboqs/randombytes.c integration/liboqs/signature.c
+  sources: integration/liboqs/signature.c
   memory_optimized: false
   supported_platforms: []
+  common_dep: qruov_common qruov_ref
 - name: opt
   version: Round 3
   folder_name: .
@@ -34,9 +35,10 @@ implementations:
   signature_keypair: qruov_1q127L10_aes_opt_crypto_sign_keypair
   signature_signature: qruov_1q127L10_aes_opt_crypto_sign_signature
   signature_verify: qruov_1q127L10_aes_opt_crypto_sign_verify
-  sources: src/api.h src/qruov.h src/qruov_param.h src/qruov_tau.h src/fql.h src/gf.h src/qrop.c src/qrop.h src/qruov_common.c src/qruov_common.h src/prg.c src/prg.h src/prim.c src/prim.h src/linsys.c src/linsys.h src/sign.c src/rng.h src/util.h src/opt/qruov.c src/opt/emi_transform.c src/opt/emi_transform_gen.c src/opt/emi_transform.h src/opt/fastop.h integration/liboqs/namespace.h integration/liboqs/randombytes.c integration/liboqs/signature.c
+  sources: integration/liboqs/signature.c
   memory_optimized: false
   supported_platforms: []
+  common_dep: qruov_common qruov_opt
 - name: avx2
   version: Round 3
   folder_name: .
@@ -44,7 +46,7 @@ implementations:
   signature_keypair: qruov_1q127L10_aes_avx2_crypto_sign_keypair
   signature_signature: qruov_1q127L10_aes_avx2_crypto_sign_signature
   signature_verify: qruov_1q127L10_aes_avx2_crypto_sign_verify
-  sources: src/api.h src/qruov.h src/qruov_param.h src/qruov_tau.h src/fql.h src/gf.h src/qrop.c src/qrop.h src/qruov_common.c src/qruov_common.h src/prg.c src/prg.h src/prim.c src/prim.h src/linsys.c src/linsys.h src/sign.c src/rng.h src/util.h src/avx2/qruov.c src/avx2/emi_transform.c src/avx2/emi_matrix.c src/avx2/emi_transform_gen.c src/avx2/helpers.c src/avx2/kernel.c src/avx2/x86aesni.c src/avx2/emi_transform.h src/avx2/fastop.h src/avx2/helpers.h src/avx2/kernel.h src/avx2/qruov_simd.h src/avx2/simd.h src/avx2/x86aesni.h integration/liboqs/namespace.h integration/liboqs/randombytes.c integration/liboqs/signature.c
+  sources: integration/liboqs/signature.c
   supported_platforms:
   - architecture: x86_64
     operating_systems:
@@ -55,3 +57,4 @@ implementations:
     - bmi2
     - aes
   memory_optimized: false
+  common_dep: qruov_common qruov_avx2
