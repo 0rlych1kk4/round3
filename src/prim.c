@@ -5,10 +5,14 @@
 #if defined(QRUOV_PRIM_OQS)
 #include <oqs/common.h>
 #define QRUOV_CLEANSE(p, n) OQS_MEM_cleanse((p), (n))
+#define QRUOV_MALLOC(n) OQS_MEM_malloc((n))
+#define QRUOV_SECURE_FREE(p, n) OQS_MEM_secure_free((p), (n))
 #else
 #include <openssl/crypto.h>
 #include <openssl/evp.h>
 #define QRUOV_CLEANSE(p, n) OPENSSL_cleanse((p), (n))
+#define QRUOV_MALLOC(n) malloc((n)) // IGNORE memory-check
+#define QRUOV_SECURE_FREE(p, n) do { OPENSSL_cleanse((p), (n)); free((p)); } while (0) // IGNORE memory-check
 #endif // QRUOV_PRIM_OQS
 #include "prim.h"
 #if defined(PRIM_AES_BACKEND_X86AESNI)
@@ -86,8 +90,7 @@ void shake128_free(shake128 *ctx)
 static void shake256_clear_cache(shake256 *ctx)
 {
     if (ctx->cache != NULL) {
-        OPENSSL_cleanse(ctx->cache, ctx->cache_size);
-        free(ctx->cache);
+        QRUOV_SECURE_FREE(ctx->cache, ctx->cache_size);
         ctx->cache = NULL;
     }
     ctx->offset = 0;
@@ -150,21 +153,19 @@ void shake256_squeeze(shake256 *ctx, uint8_t *dst, size_t size)
             EVP_MD_CTX_free(tmp);
             abort();
         }
-        uint8_t *new_cache = malloc(new_size);
+        uint8_t *new_cache = QRUOV_MALLOC(new_size);
         if (new_cache == NULL) {
             EVP_MD_CTX_free(tmp);
             abort();
         }
         if (EVP_DigestFinalXOF(tmp, new_cache, new_size) != 1) {
-            OPENSSL_cleanse(new_cache, new_size);
-            free(new_cache);
+            QRUOV_SECURE_FREE(new_cache, new_size);
             EVP_MD_CTX_free(tmp);
             abort();
         }
         EVP_MD_CTX_free(tmp);
         if (ctx->cache != NULL) {
-            OPENSSL_cleanse(ctx->cache, ctx->cache_size);
-            free(ctx->cache);
+            QRUOV_SECURE_FREE(ctx->cache, ctx->cache_size);
         }
         ctx->cache = new_cache;
         ctx->cache_size = new_size;
